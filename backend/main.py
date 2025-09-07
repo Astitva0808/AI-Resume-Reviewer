@@ -33,32 +33,27 @@ async def root():
     return {"message": "AI Resume Reviewer Backend Running (Gemini Pro)"}
 
 @app.post("/api/analyze")
-async def analyze_resume(file: UploadFile = File(...)):
-    # Read PDF content
+async def analyze_resume(file: UploadFile = File(...), job_role: str = Form(...)):
     contents = await file.read()
     reader = PyPDF2.PdfReader(io.BytesIO(contents))
-    resume_text = ""
+    text = ""
     for page in reader.pages:
-        resume_text += page.extract_text()
+        text += page.extract_text()
 
-    # Send to Gemini
-    prompt = f"Analyze this resume and provide strengths, weaknesses, and job fit:\n\n{resume_text}"
+    prompt = (
+        f"You are an expert career advisor and resume reviewer. Carefully analyze the following resume for the role of '{job_role}'.\n\n"
+        f"Your evaluation should include:\n"
+        f"1. A score out of 100 based on relevance, clarity, and impact.\n"
+        f"2. Key strengths — highlight what stands out and why.\n"
+        f"3. Weaknesses — identify gaps, vague areas, or missing elements. Each weakness should have a short description.\n"
+        f"4. Suggestions to improve weaknesses — be specific and actionable. Make descriptions short, crisp, and to the point.\n"
+        f"5. Recommendations to help this candidate land a better position — include certifications, skills to learn, projects to build, or networking strategies.\n"
+        f"6. Tone — be honest but encouraging, as if mentoring someone who genuinely wants to grow. Keep a soft tone so the candidate doesn't feel discouraged.\n\n"
+        f"Resume:\n{text}"
+    )
+
     response = model.generate_content(prompt)
-
     return {"analysis": response.text}
-
-        # Build prompt
-       prompt = (
-    f"You are an expert career advisor and resume reviewer. Carefully analyze the following resume for the role of '{job_role}'.\n\n"
-    f"Your evaluation should include:\n"
-    f"1. A score out of 100 based on relevance, clarity, and impact.\n"
-    f"2. Key strengths — highlight what stands out and why.\n"
-    f"3. Weaknesses — identify gaps, vague areas, or missing elements. Each weakness should have a short description.\n"
-    f"4. Suggestions to improve weaknesses — be specific and actionable. Make descriptions short, crisp, and to the point.\n"
-    f"5. Recommendations to help this candidate land a better position — include certifications, skills to learn, projects to build, or networking strategies.\n"
-    f"6. Tone — be honest but encouraging, as if mentoring someone who genuinely wants to grow. Keep a soft tone so the candidate doesn't feel discouraged.\n\n"
-    f"Resume:\n{text}"
-)
 
         # Send to Gemini Pro
         response = model.generate_content(prompt)
