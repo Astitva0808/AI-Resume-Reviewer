@@ -48,18 +48,17 @@ async def analyze_resume(file: UploadFile = File(...)):
     return {"analysis": response.text}
 
         # Build prompt
-        prompt = (
-            f"You are an expert career advisor and resume reviewer. Carefully analyze the following resume for the role of '{job_role}'. "
-            f"Your evaluation should include:\n\n"
-            f"1. A score out of 100 based on relevance, clarity, and impact.\n"
-            f"3. do not score way too strictly nor way too easily.Scores should change a\n"
-            f"2. Key strengths — highlight what stands out and why.\n"
-            f"4. Weaknesses — identify gaps, vague areas, or missing elements. Each weakness should have a short description.\n"
-            f"5. Suggestions to improve weaknesses — be specific and actionable.make description short , crisp and to the point.\n"
-            f"6. Recommendations to help this candidate land a better position — include certifications, skills to learn, projects to build, or networking strategies.\n"
-            f"7. Tone — be honest but encouraging, as if mentoring someone who genuinely wants to grow. Throughout the evaluation keep a soft tone so that customer don't feel discouraged at all.\n\n"
-            f"Resume:\n{text}"
-        )
+       prompt = (
+    f"You are an expert career advisor and resume reviewer. Carefully analyze the following resume for the role of '{job_role}'.\n\n"
+    f"Your evaluation should include:\n"
+    f"1. A score out of 100 based on relevance, clarity, and impact.\n"
+    f"2. Key strengths — highlight what stands out and why.\n"
+    f"3. Weaknesses — identify gaps, vague areas, or missing elements. Each weakness should have a short description.\n"
+    f"4. Suggestions to improve weaknesses — be specific and actionable. Make descriptions short, crisp, and to the point.\n"
+    f"5. Recommendations to help this candidate land a better position — include certifications, skills to learn, projects to build, or networking strategies.\n"
+    f"6. Tone — be honest but encouraging, as if mentoring someone who genuinely wants to grow. Keep a soft tone so the candidate doesn't feel discouraged.\n\n"
+    f"Resume:\n{text}"
+)
 
         # Send to Gemini Pro
         response = model.generate_content(prompt)
