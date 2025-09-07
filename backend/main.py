@@ -16,7 +16,7 @@ app = FastAPI()
 # Allow frontend requests
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[origins = ["https://ai-resume-reviewer-4ahb.onrender.com"],
+    allow_origins = ["https://ai-resume-reviewer-4ahb.onrender.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
