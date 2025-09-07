@@ -1,6 +1,7 @@
 from fastapi import FastAPI, File, UploadFile, Form
 from fastapi.middleware.cors import CORSMiddleware
 import PyPDF2
+import io
 import google.generativeai as genai
 from google.oauth2 import service_account
 
@@ -32,26 +33,19 @@ async def root():
     return {"message": "AI Resume Reviewer Backend Running (Gemini Pro)"}
 
 @app.post("/api/analyze")
-async def analyze_resume(
-    resume: UploadFile = File(...),
-    job_role: str = Form(...)
-):
-    try:
-        # Extract text from PDF
-        text = ""
-        try:
-            pdf_reader = PyPDF2.PdfReader(resume.file)
-            for page in pdf_reader.pages:
-                page_text = page.extract_text()
-                if page_text:
-                    text += page_text
-        except Exception as e:
-            print("PDF parsing failed:", e)
+async def analyze_resume(file: UploadFile = File(...)):
+    # Read PDF content
+    contents = await file.read()
+    reader = PyPDF2.PdfReader(io.BytesIO(contents))
+    resume_text = ""
+    for page in reader.pages:
+        resume_text += page.extract_text()
 
-        if not text.strip():
-            return {
-                "analysis": "❌ Could not extract text from the PDF. Please upload a typed resume with selectable text."
-            }
+    # Send to Gemini
+    prompt = f"Analyze this resume and provide strengths, weaknesses, and job fit:\n\n{resume_text}"
+    response = model.generate_content(prompt)
+
+    return {"analysis": response.text}
 
         # Build prompt
         prompt = (
