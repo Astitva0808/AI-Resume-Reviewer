@@ -13,17 +13,19 @@ model = genai.GenerativeModel("gemini-1.5-flash")
 
 app = FastAPI()
 
-# Allow frontend requests
+# Allow your deployed frontend to access the backend
+origins = [
+    "https://ai-resume-reviewer-4ahb.onrender.com"
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://localhost:5174",  # Allow both dev ports
-    ],
+    allow_origins=origins,            # Only allow your frontend
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["*"],              # Allow all HTTP methods (GET, POST, etc.)
+    allow_headers=["*"]               # Allow all headers
 )
+
 
 @app.get("/")
 async def root():
