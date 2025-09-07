@@ -53,7 +53,7 @@ const App = () => {
             formData.append("job_role", finalJobRole);
             formData.append("job_description", jobDescription);
 
-            const res = await fetch("https://airesume-reviewer.onrender.com/analyze", {
+            const res = await fetch("https://airesume-reviewer.onrender.com/api/analyze", {
                 method: "POST",
                 body: formData,
             });
