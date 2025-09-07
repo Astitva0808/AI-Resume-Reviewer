@@ -1,0 +1,335 @@
+/* ====== Layout ====== */
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0f7fa, #f1f8ff);
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  padding: 20px;
+}
+
+/* ====== Card ====== */
+.card {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 520px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ====== Header ====== */
+.header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.header .icon {
+  font-size: 2.5rem;
+  color: #0077b6;
+}
+
+.title {
+  margin: 0.5rem 0 0.2rem;
+  font-size: 2rem;
+  color: #023e8a;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+/* ====== Tabs ====== */
+.tab-group {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.tab-group button {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #f1f8ff;
+  color: #023e8a;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.tab-group button:hover {
+  background-color: #e0f7fa;
+  transform: scale(1.03);
+}
+
+.tab-group button.active {
+  background-color: #0077b6;
+  color: white;
+}
+
+/* ====== Inputs ====== */
+.file-input,
+.select,
+.input {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.file-input:focus,
+.select:focus,
+.input:focus {
+  border-color: #0077b6;
+  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.2);
+}
+
+/* ====== Upload Section ====== */
+.upload-section {
+  margin-bottom: 1.5rem;
+}
+
+.upload-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 2px dashed #0077b6;
+  border-radius: 12px;
+  padding: 1.5rem;
+  background-color: #f1f8ff;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.upload-box:hover {
+  background-color: #e0f7fa;
+  border-color: #0096c7;
+}
+
+.upload-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-icon {
+  font-size: 2rem;
+  color: #0077b6;
+  margin-bottom: 0.5rem;
+}
+
+.upload-text {
+  font-size: 0.95rem;
+  color: #343a40;
+}
+
+.upload-action {
+  color: #0077b6;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.file-input-hidden {
+  display: none;
+}
+
+.label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #023e8a;
+}
+
+/* ====== Optional Fields ====== */
+.optional-fields {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.optional-fields select,
+.optional-fields input,
+.optional-fields textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.optional-fields select:focus,
+.optional-fields input:focus,
+.optional-fields textarea:focus {
+  border-color: #0077b6;
+  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.2);
+}
+
+/* ====== Paste Textarea ====== */
+.paste-textarea {
+  width: 100%;
+  height: 150px;
+  padding: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.paste-textarea:focus {
+  border-color: #0077b6;
+  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.2);
+}
+
+/* ====== Select Wrapper ====== */
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* ====== Native Select Styling ====== */
+.select {
+  appearance: none;
+  background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><polygon points="0,0 16,0 8,8" style="fill:%236c757d"/></svg>') no-repeat right 0.8rem center;
+  background-size: 1rem;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.select option {
+  padding: 10px;
+}
+
+/* ====== Buttons ====== */
+.button-group {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.btn {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover:not(.disabled) {
+  transform: scale(1.03);
+}
+
+.analyze-btn {
+  background-color: #023e8a;
+  color: white;
+}
+
+.analyze-btn:hover:not(.disabled) {
+  background-color: #0353a4;
+}
+
+.analyze-btn.disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
+}
+
+.download-btn {
+  background-color: #0077b6;
+  color: white;
+}
+
+.download-btn:hover {
+  background-color: #0096c7;
+}
+
+/* ====== Analysis Result ====== */
+.section h3.analysis-title {
+  margin-bottom: 0.8rem;
+  color: #023e8a;
+  font-size: 1.4rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.analysis-box {
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  font-size: 0.95rem;
+  color: #343a40;
+  line-height: 1.6;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* Markdown-specific styling */
+.analysis-box h1,
+.analysis-box h2,
+.analysis-box h3 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #1c1c1c;
+}
+
+.analysis-box p {
+  margin-bottom: 0.8rem;
+}
+
+.analysis-box ul {
+  margin: 0.5rem 0 1rem 1.5rem;
+  list-style-type: disc;
+}
+
+.analysis-box li {
+  margin-bottom: 0.4rem;
+}
+
+.analysis-box strong {
+  color: #0077b6;
+}
+
+/* ====== Responsive ====== */
+/* ====== Responsive ====== */
+@media (max-width: 600px) {
+  .card {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .btn {
+    font-size: 0.85rem;
+    padding: 0.6rem;
+  }
+}
