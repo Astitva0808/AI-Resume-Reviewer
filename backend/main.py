@@ -9,7 +9,7 @@ creds = service_account.Credentials.from_service_account_file("key.json")
 genai.configure(credentials=creds)
 
 # ✅ Initialize Gemini model
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-pro")
 
 app = FastAPI()
 
