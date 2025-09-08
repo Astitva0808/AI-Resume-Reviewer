@@ -2,16 +2,10 @@ from fastapi import FastAPI, File, UploadFile, Form
 from fastapi.middleware.cors import CORSMiddleware
 import PyPDF2
 from google.oauth2 import service_account
-import os
 import google.generativeai as genai
-from dotenv import load_dotenv
 
-load_dotenv()
-genai.configure(api_key=os.getenv("AIzaSyBaVJE0JOAi0WzBxaTndamNrbg_Qd1lUbs"))
 
 model = genai.GenerativeModel("models/gemini-pro")  # ✅ Not gemini-1.5-flash
-response = model.generate_content("Your prompt here")
-
 # ✅ Load Gemini credentials from your downloaded JSON key file
 creds = service_account.Credentials.from_service_account_file("key.json")
 genai.configure(credentials=creds)
